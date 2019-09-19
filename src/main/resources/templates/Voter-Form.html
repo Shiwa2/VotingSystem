@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:action="@{/voter/register}" method="post" th:object="${voter}">
+    <input type="hidden" th:field="*{id}">
+    votingHistory: <input type="text" th:field ="*{votingHistory}"/><br>
+    currentVote: <input type="text" th:field ="*{currentVote}"/><br>
+    <button type="submit">Register </button >
+
+    <table border="1">
+
+        <tr>
+
+            <th>ID</th>
+            <th>VotingHistory</th>
+            <th>CurrentVoting</th>
+
+        </tr>
+
+        <tr th:each="voter: ${voters}">
+            <td th:text="${voter.id}"></td>
+            <td th:text="${voter.votingHistory}"></td>
+            <td th:text="${voter.currentVote"></td>
+
+            <td><a th:href="@{'/voter/edit/' + ${voter.id} }">Edit</a></td>
+            <td>
+                <form th:action="@{/voter/delete/{id}(id = ${voter.id})}" method="post">
+                    <button type="submit" onclick="return confirm('Do you really want ot delete?')">Delete</button>
+                </form>
+            </td>
+        </tr>
+    </table>>
+</form>
+
+</body>
+</html>

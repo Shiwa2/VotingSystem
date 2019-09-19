@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:action="@{/candidate/register}" method="post" th:object="${candidate}">
+    <input type="hidden" th:field="*{id}">
+
+
+    <button type="submit">Register </button >
+
+    <table border="1">
+
+        <tr>
+
+            <th>ID</th>
+            <th>QuestionEmail</th>
+        </tr>
+
+        <tr th:each="candidate: ${candidates}">
+            <td th:text="${candidate.id}"></td>
+
+            <td><a th:href="@{'/candidate/edit/' + ${candidate.id} }">Edit</a></td>
+            <td>
+                <form th:action="@{/candidate/delete/{id}(id = ${candidate.id})}" method="post">
+                    <button type="submit" onclick="return confirm('Do you really want ot delete?')">Delete</button>
+                </form>
+            </td>
+        </tr>
+    </table>>
+</form>
+</body>
+</html>

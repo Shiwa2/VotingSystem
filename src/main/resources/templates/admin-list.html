@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2><a th:href="@{/admin/register}">Add Admin</a></h2>
+
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th colspan="2">Action</th>
+    </tr>
+    <tr th:each="admin: ${admins}">
+        <td th:text="${admin.id}"></td>
+        <td><a th:href="@{'/admin/edit/' + ${admin.id} }">Edit</a></td>
+        <td>
+            <form th:action="@{/admin/delete/{id}(id = ${admin.id})}" method="post">
+                <button type="submit" onclick="return confirm('Do you really want ot delete?')">Delete</button>
+            </form>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>
